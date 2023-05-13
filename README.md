@@ -1,6 +1,6 @@
 # GPT Latency
 
-GPT Unicorn is a project that monitors OpenAI's GPT-4 model by measuring the latency of its responses to a set of prompts. The project aims to both track the changes and progress of the model over time by analyzing the latency of its responses, and to provide a public benchmark for the model's performance over time.
+GPT Latency is a project that monitors OpenAI's GPT-4 model by measuring the latency of its responses to a set of prompts. The project aims to both track the changes and progress of the model over time by analyzing the latency of its responses, and to provide a public benchmark for the model's performance over time.
 
 [View the demo](https://gpt-latency.adamkdean.co.uk)
 
