@@ -12,8 +12,8 @@ export class Monitor {
     this.gpt3t = new StreamChatAPI(config.openai.apiKey, 'gpt-3.5-turbo', !!process.env.DEBUG)
     this.gpt4 = new StreamChatAPI(config.openai.apiKey, 'gpt-4', !!process.env.DEBUG)
     this.models = {
-      'GPT-3.5': this.gpt3t,
-      'GPT-4': this.gpt4
+      'gpt-3.5-turbo': this.gpt3t,
+      'gpt-4': this.gpt4
     }
 
     // Generate a relatively small mundane response to get a baseline.
@@ -26,7 +26,11 @@ export class Monitor {
     try {
       this.flexdb = new FlexDB({ apiKey: this.config.flexdb.apiKey })
       this.store = await this.flexdb.ensureStoreExists(this.config.flexdb.store)
-      this.results = this.store.collection(this.config.flexdb.collection)
+      this.collections = {}
+      for (const [name, api] of Object.entries(this.models)) {
+        console.log(`Ensuring collection exists: ${name}`)
+        this.collections[name] = this.store.collection(name)
+      }
       console.log(`FlexDB initialized (store: ${this.store.id}, collection: ${this.results.name})`)
     } catch (error) {
       console.error('Error initializing FlexDB:', error.message)
@@ -50,8 +54,8 @@ export class Monitor {
         console.log(`timeToFirstByte: ${response.timeToFirstByte} ms`)
         console.log(`timeToLastByte: ${response.timeToLastByte} ms`)
 
-        console.log('Saving results to FlexDB...')
-        await this.results.create({
+        console.log(`Saving results to FlexDB collection: ${name}...`)
+        await this.collections[name].create({
           model: response.model,
           tokens: response.tokens,
           length: response.content.length,

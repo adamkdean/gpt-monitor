@@ -8,8 +8,7 @@ dotenv.config()
 export default {
   flexdb: {
     apiKey: process.env.FLEXDB_API_KEY,
-    store: 'gpt-monitor',
-    collection: 'results'
+    store: 'gpt-monitor'
   },
   monitor: {
     pattern: process.env.MONITOR_PATTERN || '*/15 * * * *'
