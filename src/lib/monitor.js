@@ -25,13 +25,14 @@ export class Monitor {
     console.log('Initializing FlexDB...')
     try {
       this.flexdb = new FlexDB({ apiKey: this.config.flexdb.apiKey })
+      console.log(`Ensuring store exists ${this.config.flexdb.store}`)
       this.store = await this.flexdb.ensureStoreExists(this.config.flexdb.store)
       this.collections = {}
       for (const [name, api] of Object.entries(this.models)) {
         console.log(`Ensuring collection exists: ${name}`)
         this.collections[name] = this.store.collection(name)
       }
-      console.log(`FlexDB initialized (store: ${this.store.id}, collection: ${this.results.name})`)
+      console.log(`FlexDB initialized (store: ${this.store.id})`)
     } catch (error) {
       console.error('Error initializing FlexDB:', error.message)
     }
@@ -45,10 +46,10 @@ export class Monitor {
       for (const [name, api] of Object.entries(this.models)) {
         console.log(`----\nPerforming API test for ${name}...`)
         const response = await api.generateCompletion(this.messages, this.options)
-        const msPerToken = this.roundToTwoDecimals(elapsed / response.tokens)
-        const tokensPerMinute = this.roundToTwoDecimals(response.tokens / (elapsed / 1000 / 60))
+        const msPerToken = this.roundToTwoDecimals(response.timeToLastByte / response.tokens)
+        const tokensPerMinute = this.roundToTwoDecimals(response.tokens / (response.timeToLastByte / 1000 / 60))
         console.log(`Response: "${response.content}"`)
-        console.log(`${response.model}: ${elapsed} ms with ${response.tokens} tokens`)
+        console.log(`${response.model}: ${response.tokens} tokens`)
         console.log(`${msPerToken} ms/token`)
         console.log(`${tokensPerMinute} tokens/minute`)
         console.log(`timeToFirstByte: ${response.timeToFirstByte} ms`)
