@@ -37,8 +37,15 @@ export class Monitor {
       console.error('Error initializing FlexDB:', error.message)
     }
 
-    if (!process.env.DEBUG) cron.schedule(this.config.monitor.pattern, this.performCheck.bind(this))
-    else this.performCheck()
+    if (!process.env.DEBUG) {
+      console.log(`Scheduling monitor to run every ${this.config.monitor.pattern}`)
+      cron.schedule(this.config.monitor.pattern, this.performCheck.bind(this))
+      return
+    }
+
+    // debug
+    console.log('Running in debug mode, performing check now...')
+    this.performCheck()
   }
 
   async performCheck() {
