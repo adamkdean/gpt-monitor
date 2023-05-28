@@ -7,9 +7,6 @@ import path from 'path'
 import { Monitor } from './lib/monitor.js'
 import config from './config.js'
 
-console.log('config loaded')
-console.log(config)
-
 const monitor = new Monitor(config)
 
 const app = express()
