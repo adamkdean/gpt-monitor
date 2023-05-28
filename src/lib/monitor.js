@@ -66,7 +66,7 @@ export class Monitor {
         await this.collections[name].create({
           model: response.model,
           tokens: response.tokens,
-          length: response.content.length,
+          bytes: response.content.length,
           timeToFirstByte: response.timeToFirstByte,
           timeToLastByte: response.timeToLastByte,
           msPerToken,
