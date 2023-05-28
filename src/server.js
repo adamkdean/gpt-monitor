@@ -8,7 +8,7 @@ import { Monitor } from './lib/monitor.js'
 import config from './config.js'
 
 // const storage = new LocalStorage('main', config.storage.path)
-const monitor = new Monitor(config, storage)
+const monitor = new Monitor(config)
 
 const app = express()
 app.disable('x-powered-by')

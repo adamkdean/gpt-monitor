@@ -3,9 +3,9 @@
 # Use of this source code is governed by the GPL-3.0
 # license that can be found in the LICENSE file.
 
-CONTAINER_NAME="gpt-latency"
-IMAGE_NAME="gpt-latency"
-HOSTNAME="gpt-latency.adamkdean.co.uk"
+CONTAINER_NAME="gpt-monitor"
+IMAGE_NAME="gpt-monitor"
+HOSTNAME="gpt-monitor.adamkdean.co.uk"
 
 # First, build the new image
 docker build -t $IMAGE_NAME .
