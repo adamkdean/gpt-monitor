@@ -12,8 +12,8 @@ export class Monitor {
     this.gpt3t = new StreamChatAPI(config.openai.apiKey, 'gpt-3.5-turbo', !!process.env.DEBUG)
     this.gpt4 = new StreamChatAPI(config.openai.apiKey, 'gpt-4', !!process.env.DEBUG)
     this.models = {
-      'gpt-3.5-turbo': this.gpt3t,
-      'gpt-4': this.gpt4
+      'gpt35t': this.gpt3t,
+      'gpt4': this.gpt4
     }
 
     // Generate a relatively small mundane response to get a baseline.
