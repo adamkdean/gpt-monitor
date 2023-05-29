@@ -12,11 +12,23 @@
     <h1>GPT Monitor</h1>
     <div class="subtitle">
       <p>Monitoring OpenAI GPT API metrics</p>
-      <p><a href="https://github.com/adamkdean/gpt-monitor">GitHub Repo</a></p>
+      <p>Currently generating responses every 3 hours with max 50 tokens. (Limited by cost.)</p>
+      <p><a href="https://www.adamkdean.co.uk/">Personal Website</a> / <a href="https://github.com/adamkdean/gpt-monitor">GitHub Repo</a></p>
     </div>
 
-    TODO
+    <div class="navigation">
+      <a href="#tokensPerMinute">Tokens/minute</a>
+      <a href="#msPerToken">Milliseconds/token</a>
+      <a href="#timeToFirstByte">Time to First Byte</a>
+      <a href="#timeToLastByte">Time to Last Byte</a>
+    </div>
 
+    <div class="grid-container">
+      <div class="grid-item" id="tokensPerMinute"><img src="/images/tokensPerMinute_over_time.png" alt="Tokens/minute"></div>
+      <div class="grid-item" id="msPerToken"><img src="/images/msPerToken_over_time.png" alt="Milliseconds/token"></div>
+      <div class="grid-item" id="timeToFirstByte"><img src="/images/timeToFirstByte_over_time.png" alt="TTFB"></div>
+      <div class="grid-item" id="timeToLastByte"><img src="/images/timeToLastByte_over_time.png" alt="TTLB"></div>
+    </div>
   </div>
 </body>
 </html>

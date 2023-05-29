@@ -16,9 +16,7 @@ app.set('views', path.join(path.resolve(), 'src', 'views'))
 app.use(express.static(path.join(path.resolve(), 'src', 'public')))
 
 app.get('/', async (req, res) => {
-  // TODO: get data
-  const data = []
-  res.render('index', { data })
+  res.render('index')
 })
 
 app.listen(config.server.port, async () => {

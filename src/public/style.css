@@ -29,52 +29,26 @@ div.subtitle p {
   margin: 0 0 10px 0;
 }
 
-.today {
-  margin: 0 auto;
-  margin-bottom: 40px;
+.navigation {
   text-align: center;
-  border: 1px solid #ccc;
-  padding: 1rem;
 }
-
-.today svg {
-  width: 500px;
-  height: 500px;
+.navigation a {
+  margin: 0 0.5rem;
 }
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
+  grid-template-columns: auto;
+  padding: 10px;
 }
 
 .grid-item {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #ccc;
-  padding: 1rem;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
 }
 
 .grid-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.date {
-  font-size: 1rem;
-  font-weight: bold;
-  margin-top: 0.5rem;
-  margin-bottom: 0.25rem;
-  text-align: center;
-}
-
-.metadata {
-  font-size: 0.7rem;
-  font-weight: normal;
-  margin-top: 0.25rem;
-  margin-bottom: 0.5rem;
-  text-align: center;
-  color: #ccc;
+  max-width: 100%;
+  height: auto;
 }

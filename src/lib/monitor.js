@@ -22,6 +22,11 @@ export class Monitor {
   }
 
   async initialize() {
+    if (!this.config.monitor.enabled) {
+      console.log('Monitor is disabled, skipping initialization')
+      return
+    }
+
     console.log('Initializing FlexDB...')
     try {
       this.flexdb = new FlexDB({ apiKey: this.config.flexdb.apiKey })

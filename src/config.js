@@ -11,6 +11,7 @@ export default {
     store: process.env.FLEXDB_STORE || 'gpt-monitor'
   },
   monitor: {
+    enabled: process.env.MONITOR_ENABLED !== 'false' || false,
     pattern: process.env.MONITOR_PATTERN || '*/15 * * * *'
   },
   openai: {
