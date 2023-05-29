@@ -6,8 +6,8 @@ FROM python:3.8-slim-buster
 
 WORKDIR /app
 
-ADD crontab /etc/cron.d/hourly-job
-RUN chmod 0644 /etc/cron.d/hourly-job
+ADD crontab /etc/cron.d/generate-images
+RUN chmod 0644 /etc/cron.d/generate-images
 RUN touch /var/log/cron.log
 
 RUN apt-get update
