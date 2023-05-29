@@ -27,7 +27,7 @@ docker run \
   --env FLEXDB_API_KEY=$FLEXDB_API_KEY \
   --env OUTPUT_PATH=/images \
   --volume gpt-monitor-data:/images \
-  $IMAGE_NAME
+  $CRON_IMAGE_NAME
 
 docker run \
   --detach \
@@ -42,4 +42,4 @@ docker run \
   --env VIRTUAL_HOST=$HOSTNAME \
   --env LETSENCRYPT_HOST=$HOSTNAME \
   --volume gpt-monitor-data:/www/src/public/images \
-  $IMAGE_NAME
+  $MAIN_IMAGE_NAME
