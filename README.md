@@ -6,6 +6,11 @@ GPT Monitor is a project that monitors OpenAI's GPT models by measuring certain 
 
 Note: this is a small fire-and-forget pet project. It is not intended to be used for anything serious.
 
+### Improvements
+
+1. Run multiple requests each time and use the mean
+2. Run requests more frequently (costs!)
+
 ## Contributing
 
 Feel free to submit issues or pull requests if you'd like to contribute to the project or have any suggestions for improvements.
