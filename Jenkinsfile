@@ -3,22 +3,36 @@
 # Use of this source code is governed by the GPL-3.0
 # license that can be found in the LICENSE file.
 
-CONTAINER_NAME="gpt-monitor"
-IMAGE_NAME="gpt-monitor"
+MAIN_IMAGE_NAME="gpt-monitor"
+MAIN_CONTAINER_NAME="gpt-monitor"
+CRON_IMAGE_NAME="gpt-monitor-cron"
+CRON_CONTAINER_NAME="gpt-monitor-cron"
+
 HOSTNAME="gpt-monitor.adamkdean.co.uk"
 
-# First, build the new image
-docker build -t $IMAGE_NAME .
+# First, build the images
+docker build -t $MAIN_IMAGE_NAME -f Dockerfile .
+docker build -t $CRON_IMAGE_NAME -f Dockerfile.cron .
 
 # Next, stop and remove the old image
-docker stop $CONTAINER_NAME
-docker rm $CONTAINER_NAME
+docker rm -f $MAIN_CONTAINER_NAME
+docker rm -f $CRON_CONTAINER_NAME
 
-# Finally, run the new image
+# Finally, run the new images
 docker run \
   --detach \
   --restart always \
-  --name $CONTAINER_NAME \
+  --name $CRON_CONTAINER_NAME \
+  --network core-network \
+  --env FLEXDB_API_KEY=$FLEXDB_API_KEY \
+  --env OUTPUT_PATH=/images \
+  --volume gpt-monitor-data:/images \
+  $IMAGE_NAME
+
+docker run \
+  --detach \
+  --restart always \
+  --name $MAIN_CONTAINER_NAME \
   --network core-network \
   --expose 8000 \
   --env HTTP_PORT=8000 \
@@ -27,4 +41,5 @@ docker run \
   --env MONITOR_PATTERN="$MONITOR_PATTERN" \
   --env VIRTUAL_HOST=$HOSTNAME \
   --env LETSENCRYPT_HOST=$HOSTNAME \
+  --volume gpt-monitor-data:/www/src/public/images \
   $IMAGE_NAME

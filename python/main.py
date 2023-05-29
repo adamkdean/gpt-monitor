@@ -39,7 +39,7 @@ def create_images(data):
     """
     try:
         # Path where images will be saved
-        images_path = '../src/public/images/'
+        images_path = os.getenv('OUTPUT_PATH', './')
 
         # Create folder if it doesn't exist
         if not os.path.exists(images_path):
