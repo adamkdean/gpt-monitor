@@ -48,19 +48,19 @@ def create_images(data):
 
         metrics_to_plot = {
             'msPerToken': {
-                'title': 'Milliseconds per Token (last 24 hours)',
+                'title': 'Milliseconds per Token',
                 'ylabel': 'Milliseconds'
             },
             'tokensPerMinute': {
-                'title': 'Tokens per Minute (last 24 hours)',
+                'title': 'Tokens per Minute',
                 'ylabel': 'Tokens/Min'
             },
             'timeToFirstByte': {
-                'title': 'Time to First Byte (last 24 hours)',
+                'title': 'Time to First Byte',
                 'ylabel': 'Milliseconds'
             },
             'timeToLastByte': {
-                'title': 'Time to Last Byte (last 24 hours)',
+                'title': 'Time to Last Byte',
                 'ylabel': 'Milliseconds'
             },
         }
