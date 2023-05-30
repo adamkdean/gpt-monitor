@@ -22,12 +22,15 @@ def fetch_data(store):
     """
     Fetches all metrics from the database (every single document)
     """
+    print('Fetching data from database')
     gpt35t = store.collection('gpt35t')
     gpt35t_total = gpt35t.get_many({'page': 1, 'limit': 1})['metadata']['total']
     gpt35t_metrics = gpt35t.get_many({'limit': gpt35t_total})['documents']
+    print('Fetched gpt-3.5-turbo metrics ({} documents)'.format(gpt35t_total)
     gpt4 = store.collection('gpt4')
     gpt4_total = gpt4.get_many({'page': 1, 'limit': 1})['metadata']['total']
     gpt4_metrics = gpt4.get_many({'limit': gpt4_total})['documents']
+    print('Fetched gpt-4 metrics ({} documents)'.format(gpt4_total)
     return [{
         'gpt35t': gpt35t_metrics,
         'gpt4': gpt4_metrics
@@ -38,10 +41,8 @@ def create_images(data):
     Generates graph images from the data
     """
     try:
-        # Path where images will be saved
+        print('Generating images')
         images_path = os.getenv('OUTPUT_PATH', './')
-
-        # Create folder if it doesn't exist
         if not os.path.exists(images_path):
             os.makedirs(images_path)
 
@@ -65,9 +66,10 @@ def create_images(data):
         }
 
         for metric, plot_settings in metrics_to_plot.items():
+            print(f'Generating image for {metric}')
             plt.figure(figsize=(12, 6))
 
-            for key in data[0]:  # note the change here
+            for key in data[0]:
                 df = pd.json_normalize(data[0][key])
                 df['createdAt'] = pd.to_datetime(df['createdAt']).dt.tz_localize(None)
                 plt.plot(df['createdAt'], df[metric], label=key)
@@ -100,6 +102,5 @@ def main():
     except Exception as e:
         print(f'An error occurred: {e}')
 
-# The entry point for the script
 if __name__ == '__main__':
     main()

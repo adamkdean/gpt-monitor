@@ -4,16 +4,33 @@
 
 FROM python:3.8-slim-buster
 
+ENV FLEXDB_API_KEY sk-
+ENV OUTPUT_PATH /images
+
 WORKDIR /app
 
-ADD crontab /etc/cron.d/generate-images
-RUN chmod 0644 /etc/cron.d/generate-images
-RUN touch /var/log/cron.log
-
-RUN apt-get update
-RUN apt-get -y install cron
-
-COPY python /app
+COPY python/requirements.txt /app
 RUN pip install --no-cache-dir -r requirements.txt
+COPY python/ /app
 
-CMD cron && tail -f /var/log/cron.log
+ENTRYPOINT ["/app/entrypoint.sh"]
+
+# FROM ubuntu:latest
+
+# ENV FLEXDB_API_KEY sk-
+# ENV OUTPUT_PATH /images
+
+# WORKDIR /app
+
+# RUN apt-get update
+# RUN apt-get -y install cron nano watch python3 python3-pip
+
+# COPY python/ /app
+# RUN pip install --no-cache-dir -r requirements.txt
+
+# RUN echo '* * * * * root cd /app && source .env && python3 src/main.py' >> /etc/crontab
+# RUN echo '* * * * * root cd /app && source .env && env >> log.txt' >> /etc/crontab
+# RUN touch /app/log.txt
+
+# #CMD cron && tail -f /var/log/cron.log
+# CMD env > .env && cron && tail -f /app/log.txt
