@@ -26,11 +26,11 @@ def fetch_data(store):
     gpt35t = store.collection('gpt35t')
     gpt35t_total = gpt35t.get_many({'page': 1, 'limit': 1})['metadata']['total']
     gpt35t_metrics = gpt35t.get_many({'limit': gpt35t_total})['documents']
-    print('Fetched gpt-3.5-turbo metrics ({} documents)'.format(gpt35t_total)
+    print('Fetched gpt-3.5-turbo metrics ({} documents)').format(gpt35t_total)
     gpt4 = store.collection('gpt4')
     gpt4_total = gpt4.get_many({'page': 1, 'limit': 1})['metadata']['total']
     gpt4_metrics = gpt4.get_many({'limit': gpt4_total})['documents']
-    print('Fetched gpt-4 metrics ({} documents)'.format(gpt4_total)
+    print('Fetched gpt-4 metrics ({} documents)').format(gpt4_total)
     return [{
         'gpt35t': gpt35t_metrics,
         'gpt4': gpt4_metrics
