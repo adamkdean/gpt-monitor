@@ -12,7 +12,7 @@ export default {
   },
   monitor: {
     enabled: process.env.MONITOR_ENABLED !== 'false' || false,
-    pattern: process.env.MONITOR_PATTERN || '*/15 * * * *'
+    pattern: process.env.MONITOR_PATTERN || '0 * * * *'
   },
   openai: {
     apiKey: process.env.OPENAI_API_KEY
