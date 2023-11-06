@@ -31,9 +31,14 @@ def fetch_data(store):
     gpt4_total = gpt4.get_many({'page': 1, 'limit': 1})['metadata']['total']
     gpt4_metrics = gpt4.get_many({'limit': gpt4_total})['documents']
     print('Fetched gpt-4 metrics ({} documents)'.format(gpt4_total))
+    gpt4t = store.collection('gpt4t')
+    gpt4t_total = gpt4t.get_many({'page': 1, 'limit': 1})['metadata']['total']
+    gpt4t_metrics = gpt4t.get_many({'limit': gpt4t_total})['documents']
+    print('Fetched gpt-4-1106-preview metrics ({} documents)'.format(gpt4t_total))
     return [{
         'gpt35t': gpt35t_metrics,
-        'gpt4': gpt4_metrics
+        'gpt4': gpt4_metrics,
+        'gpt4t': gpt4t_metrics
     }]
 
 def create_images(data):
